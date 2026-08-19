@@ -1,0 +1,21 @@
+name: consume-workflow
+on:
+  push:
+    branches:
+      - feature/*
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+  ## call generic workflow
+    permissions:
+      contents: read
+      id-token: write
+    uses: eddiez0719/shared-workflows/.github/workflows/reusable.yml@feature/generic-reusable-workflow
+    with:
+      env: qa
+    secrets:
+      aws-role-arn: ${{ secrets.AWS_ROLE_ARN }}
+      
