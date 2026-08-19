@@ -1,0 +1,15 @@
+name: consume-workflow
+on:
+  push:
+    branches:
+      - main
+      - dev/*
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    uses: eddiez0719/shared-workflows/.github/workflows/reusable-workflow.yml@feature/create-reusabl-workflows
+    secrets:
+      aws-role-arn: ${{ secrets.AWS_ROLE_ARN }}

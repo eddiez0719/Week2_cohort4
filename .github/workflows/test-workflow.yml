@@ -11,5 +11,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Run build
-        run: echo "Building Docker image..."
+      - name: Run Build Process
+        run: make build
