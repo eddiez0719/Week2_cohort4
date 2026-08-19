@@ -1,0 +1,15 @@
+name: consume-workflow
+on:
+  push:
+    branches:
+      - feature/*
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+  ## call generic workflow
+    uses: eddiez0719/shared-workflows/.github/workflows/reusable.yml@feature/generic-reusable-workflow
+    secrets:
+      MY_SECRET: ${{ secrets.AWS_ACCESS_KEY_ID}}
