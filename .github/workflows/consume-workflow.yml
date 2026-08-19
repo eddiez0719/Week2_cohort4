@@ -11,6 +11,8 @@ jobs:
   deploy:
   ## call generic workflow
     uses: eddiez0719/shared-workflows/.github/workflows/reusable.yml@feature/generic-reusable-workflow
+    with:
+      env: qa
     secrets:
-      MY_SECRET: ${{ secrets.AWS_ACCESS_KEY_ID}}
+      aws-role-arn: ${{ secrets.AWS_ROLE_ARN }}
       
