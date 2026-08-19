@@ -2,7 +2,7 @@ name: CI                                   # 显示名字
 
 on:
   push:
-    branches: [dev, qa, staging, main]     # 这几个分支的 push 都会触发这个 workflow
+    branches: [dev/*, qa/*, staging/*, main]     # 这几个分支的 push 都会触发这个 workflow
   pull_request:                            # 开 PR / 更新 PR 也会触发（只跑检查）
 
 jobs:
