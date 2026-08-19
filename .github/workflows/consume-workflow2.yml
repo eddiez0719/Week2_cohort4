@@ -1,15 +1,21 @@
-name: CI                                   # 显示名字
+name: CI
 
 on:
   push:
-    branches: [dev/*, qa/*, staging/*, main]     # 这几个分支的 push 都会触发这个 workflow
-  pull_request:                            # 开 PR / 更新 PR 也会触发（只跑检查）
+    branches:
+      - 'dev/*'
+      - 'qa/*'
+      - 'staging/*'
+      - main
+
+  pull_request:
 
 jobs:
-  deploy-dev:                                              # job id：deploy-dev
-    if: github.ref == 'refs/heads/dev'                     # 条件：只有 push 到 dev 分支才跑这个 job
-    uses: eddiez0719/shared-workflows/.github/workflows/reusable-workflow2.yml@feature/create-reusable-workflows  # uses：调用 generic repo 里的 workflow
-    with:                                                    # with：传 inputs 参数
-      environment: dev                                       # 告诉被调用方这次是部署到 dev
-    secrets:                                                 # secrets：传敏感参数
-      aws-role-arn: ${{ secrets.AWS_ROLE_ARN }}              # 把本仓库的 secret 传给被调用方
+
+  deploy-dev:
+    if: startsWith(github.ref, 'refs/heads/dev/')
+    uses: eddiez0719/shared-workflows/.github/workflows/reusable-workflow2.yml@feature/create-reusable-workflows
+    with:
+      environment: dev
+    secrets:
+      aws-role-arn: ${{ secrets.AWS_ROLE_ARN }}
