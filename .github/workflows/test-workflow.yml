@@ -1,0 +1,27 @@
+name: test-workflow
+on:
+  push:
+    branches:
+      - 'dev/*'
+  pull_request:
+    branches:
+      - 'main'
+jobs:
+## build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Build Process
+        run: make build
+## deploy job
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/heads/dev/')
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Deploy Process
+        env:
+          MY_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        run: make deploy

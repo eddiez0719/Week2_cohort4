@@ -1,0 +1,32 @@
+name: test-workflow
+on:
+  push:
+    branches:
+      - main
+      - dev/*
+  pull_request:
+    branches:
+      - main
+jobs:
+## build step
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run build
+        run: make build
+## deploy step
+  deploy:
+    needs: build
+    if: startsWith(github.ref, 'refs/heads/dev/')
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env: [dev, qa]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        run: make deploy ENV=${{matrix.env}}
+       
