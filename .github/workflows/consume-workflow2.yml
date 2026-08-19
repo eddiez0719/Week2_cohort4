@@ -14,7 +14,7 @@ jobs:
 
   deploy-dev:
     if: startsWith(github.ref, 'refs/heads/dev/')
-    uses: eddiez0719/shared-workflows/.github/workflows/reusable-workflow2.yml@feature/create-reusable-workflows
+    uses: eddiez0719/shared-workflows/.github/workflows/reusable-workflow2.yml@feature/create-reusabl-workflows
     with:
       environment: dev
     secrets:
