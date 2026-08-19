@@ -19,4 +19,3 @@ jobs:
     secrets:
       aws-role-arn: ${{ secrets.AWS_ROLE_ARN }}
       
-      
