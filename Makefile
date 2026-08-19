@@ -3,4 +3,4 @@
 build:
 	docker build .
 deploy:
-	echo "deploying application to ${ENV}"
+	@echo "deploying application to ${ENV}"
